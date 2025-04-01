@@ -1,0 +1,18 @@
+.container{
+    position: relative;
+}
+.video{
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    }
+.overlay{
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(231, 227, 204, 0.363);
+    z-index: 2;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+}

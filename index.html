@@ -10,15 +10,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Inspiration&display=swap" rel="stylesheet">
 </head>
 <body>
-    
-    <section>
-        <div class="container">
-            <div class="video">
-                <video autoplay loop muted src="video/Gen-3 Alpha Turbo 2937429292, quiero que me hagas , Cropped - Sin título, M 5.mp4" type="video/mp4"></video>
-            </div>
-            <div class="overlay"></div>
+    <header>
+        <div class="wrapper">
+          <div class="logo">
+              <img src="video/844174104325207402 2.png" alt="foto del logo">
+          </div>
+          <nav>
+              <a href="#">Inicio</a>
+              <a href="#">Obras</a>
+              <a href="#">Artistas</a>
+              <a href="#">Diseña</a>
+              <a href="#">Tienda</a>
+          </nav>
         </div>
-    </section>
+      </header>
+
+    <div class="container">
+        <div class="fondo">
+            <video class="video" autoplay loop muted src="video/9XcG5yzwHJUA9vJJCjBj.mp4" type="video/mp4" ></video>
+        </div>
+        <div class="overlay"></div>
+        <div class="titulo">
+            <h1>Galeria<br> de arte</h1>
+        </div>
+    </div>
+    
     <section class="draw-section">
             <div class="canvas-container">
                 <canvas id="mainCanvas"></canvas>
@@ -44,33 +60,6 @@
                 <button class="clear-btn" onclick="clearCanvas()">Limpiar</button>
             </div>
     </section>
-
-
-    <header>
-        <div class="wrapper">
-          <div class="logo">
-              <img src="video/844174104325207402 2.png" alt="foto del logo">
-          </div>
-          <nav>
-              <a href="#">Inicio</a>
-              <a href="#">Obras</a>
-              <a href="#">Artistas</a>
-              <a href="#">Diseña</a>
-              <a href="#">Tienda</a>
-          </nav>
-        </div>
-      </header>
-
-    <div class="container">
-        <div class="fondo">
-            <video class="video" autoplay loop muted src="video/9XcG5yzwHJUA9vJJCjBj.mp4" type="video/mp4" ></video>
-        </div>
-        <div class="overlay"></div>
-        <div class="titulo">
-            <h1>Galeria<br> de arte</h1>
-        </div>
-    </div>
-
     <script src="js/main.js"></script>
 </body>
 </html>

@@ -1,9 +1,8 @@
-body{
+*, *:hover, *:active, *:focus {
     cursor:
-    url('../img/cepillo-de-pintura\(1\).png') 2 6,
-    auto;
-}
-
+    url('../img/cepillo-de-pintura\(3\).png') 3 5,
+    auto !important;
+  }
 .container{
     position: relative;
 }

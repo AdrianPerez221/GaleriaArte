@@ -127,7 +127,7 @@ header {
 .titulo{
     position: absolute;
     top: 20%;
-    left: 15%;
+    left: 10%;
     z-index: 3;
     color: #F0E4CC;
     max-width: 90%;
@@ -138,6 +138,7 @@ h1{
     font-family: "Inspiration", cursive;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     line-height: 100%;
+    letter-spacing: 4px;
 }
 .wrapper {
     width: 90%;

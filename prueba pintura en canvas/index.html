@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galería de Arte 3D</title>
+  <style>
+    /* Reset y estilos básicos */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: #222;
+      color: #fff;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2rem;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .section-title {
+      margin: 2rem 0 1rem;
+      font-size: 1.8rem;
+      color: #222;
+    }
+    /* Estilos para el carrusel */
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      margin: 1rem 0;
+    }
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      gap: 1.5rem;
+      padding: 1rem;
+    }
+    /* Esconder scrollbar en navegadores Webkit */
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .carousel-btn.prev {
+      left: 10px;
+    }
+    .carousel-btn.next {
+      right: 10px;
+    }
+    /* Tarjetas de arte con tamaño fijo */
+    .artwork {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      min-width: 280px;  /* Valor mínimo para el carrusel */
+      max-width: 320px;  /* Puedes ajustar el ancho deseado */
+      height: 450px;     /* Altura fija para toda la tarjeta */
+      display: flex;
+      flex-direction: column;
+    }
+    .artwork:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+    }
+    .artwork img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+    .art-info {
+      padding: 1rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .art-info h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+      color: #222;
+    }
+    .art-info p.artist {
+      font-style: italic;
+      color: #555;
+      margin-bottom: 0.5rem;
+    }
+    /* La descripción tiene un alto máximo y scroll vertical si excede ese espacio */
+    .art-info p.description {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 1rem;
+      max-height: 80px;      /* Altura máxima para el texto */
+      overflow-y: auto;      /* Se activa el scroll vertical si excede */
+      padding-right: 5px;    /* Para evitar que el scrollbar tape el texto */
+    }
+    /* Botón 3D con decoración */
+    .btn-3d {
+      display: inline-block;
+      background: #2c3e50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: bold;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.3s ease;
+      overflow: hidden;
+      margin-top: auto;  /* Se posiciona al final para ocupar el espacio disponible */
+    }
+    .btn-3d:hover {
+      background: #34495e;
+    }
+    .btn-3d::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-top: 25px solid white;
+      border-left: 25px solid transparent;
+    }
+    /* Modal para el visor 3D */
+    .modal {
+      display: none; /* Oculto por defecto */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      position: relative;
+      width: 80%;
+      height: 80%;
+      background-color: #333;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .close-button {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
+      z-index: 1010;
+    }
+    #viewer {
+      width: 100%;
+      height: 100%;
+    }
+    @media (max-width: 768px) {
+      .carousel {
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Encabezado -->
+  <header>
+    <h1>Galería de Arte 3D</h1>
+  </header>
+  
+  <div class="container">
+    <!-- Sección de Pinturas con carrusel -->
+    <section>
+      <h2 class="section-title">Pinturas</h2>
+      <div class="carousel-container">
+        <button class="carousel-btn prev">&#10094;</button>
+        <div class="carousel">
+          <!-- Card 1: Ejemplo "La voz del mar" -->
+          <div class="artwork">
+            <img src="img/la-voz-del-mar.jpg" alt="La voz del mar">
+            <div class="art-info">
+              <h3>La voz del mar</h3>
+              <p class="artist">Autor: [Nombre del autor]</p>
+              <p class="description">
+                Esta obra transmite una sensación de calma en medio del océano, utilizando una paleta única que evoca emociones intensas. Si el texto es muy extenso, esta área se desplazará en forma vertical para mostrar todo el contenido.
+              </p>
+              <button class="btn-3d" data-model="3d-glb/la-voz-del-mar.glb">Ver en 3D</button>
+            </div>
+          </div>
+          <!-- Card 2: Ejemplo "La noche estrellada" -->
+          <div class="artwork">
+            <img src="img/noche-estrellada.jpg" alt="La noche estrellada">
+            <div class="art-info">
+              <h3>La noche estrellada</h3>
+              <p class="artist">Vincent van Gogh</p>
+              <p class="description">
+                Obra icónica del postimpresionismo donde se plasma un cielo lleno de movimiento y emoción. El efecto del pincel, la cantidad de detalles y el juego de luces hacen que el observador se sienta inmerso en la escena.
+              </p>
+              <button class="btn-3d" data-model="3d-glb/noche-estrellada.glb">Ver en 3D</button>
+            </div>
+          </div>
+          <!-- Puedes agregar más cards de pinturas aquí -->
+        </div>
+        <button class="carousel-btn next">&#10095;</button>
+      </div>
+    </section>
+    
+    <!-- Sección de Esculturas con carrusel -->
+    <section>
+      <h2 class="section-title">Esculturas</h2>
+      <div class="carousel-container">
+        <button class="carousel-btn prev">&#10094;</button>
+        <div class="carousel">
+          <!-- Card 1: Ejemplo "Escultura abstracta" -->
+          <div class="artwork">
+            <img src="img/escultura-abstracta.jpg" alt="Escultura abstracta">
+            <div class="art-info">
+              <h3>Escultura abstracta</h3>
+              <p class="artist">Autor: [Nombre del autor]</p>
+              <p class="description">
+                Una pieza moderna que combina formas y volúmenes de manera única. Su acabado y composición invitan a la reflexión sobre la geometría en el arte.
+              </p>
+              <button class="btn-3d" data-model="3d-glb/escultura-abstracta.glb">Ver en 3D</button>
+            </div>
+          </div>
+          <!-- Card 2: Ejemplo "Escultura clásica" -->
+          <div class="artwork">
+            <img src="img/escultura-clasica.jpg" alt="Escultura clásica">
+            <div class="art-info">
+              <h3>Escultura clásica</h3>
+              <p class="artist">Autor: [Nombre del autor]</p>
+              <p class="description">
+                Representación de la tradición en escultura clásica, en la que se destacan los detalles y líneas heredadas de la estética antigua.
+              </p>
+              <button class="btn-3d" data-model="3d-glb/escultura-clasica.glb">Ver en 3D</button>
+            </div>
+          </div>
+          <!-- Agrega más cards de esculturas aquí -->
+        </div>
+        <button class="carousel-btn next">&#10095;</button>
+      </div>
+    </section>
+  </div>
+  
+  <!-- Modal para el visor 3D -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <div id="viewer"></div>
+    </div>
+  </div>
+  
+  <!-- Inclusión de Three.js, GLTFLoader y OrbitControls desde jsDelivr -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.138/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.138/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.138/examples/js/controls/OrbitControls.js"></script>
+  
+  <script>
+    // --- Modal y visor 3D ---
+    const modal = document.getElementById('modal');
+    const viewerContainer = document.getElementById('viewer');
+    const closeButton = document.querySelector('.close-button');
+    const openButtons = document.querySelectorAll('.btn-3d');
+
+    // Variables de Three.js
+    let renderer, scene, camera, controls, animationId;
+
+    function init3DViewer(glbUrl) {
+      if (renderer) {
+        renderer.dispose();
+        viewerContainer.innerHTML = '';
+      }
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(viewerContainer.clientWidth, viewerContainer.clientHeight);
+      viewerContainer.appendChild(renderer.domElement);
+
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(
+        45,
+        viewerContainer.clientWidth / viewerContainer.clientHeight,
+        0.1,
+        1000
+      );
+      camera.position.set(3, 1, 7);
+
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+      scene.add(ambientLight);
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+      directionalLight.position.set(0, 1, 1);
+      scene.add(directionalLight);
+
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      
+      const loader = new THREE.GLTFLoader();
+      loader.load(
+        glbUrl,
+        function (gltf) {
+          scene.add(gltf.scene);
+          // Ajuste de cámara según el tamaño del modelo.
+          const box = new THREE.Box3().setFromObject(gltf.scene);
+          const center = new THREE.Vector3();
+          box.getCenter(center);
+          const size = new THREE.Vector3();
+          box.getSize(size);
+          const maxDim = Math.max(size.x, size.y, size.z);
+          const fov = camera.fov * (Math.PI / 180);
+          const cameraDistance = (maxDim / (2 * Math.tan(fov / 2))) * 1.5;
+          camera.position.copy(center);
+          camera.position.z += cameraDistance;
+          camera.lookAt(center);
+          controls.target.copy(center);
+        },
+        undefined,
+        function (error) {
+          console.error('Error al cargar el modelo:', error);
+        }
+      );
+
+      function animate() {
+        animationId = requestAnimationFrame(animate);
+        controls.update();
+        renderer.render(scene, camera);
+      }
+      animate();
+      window.addEventListener('resize', onWindowResize, false);
+    }
+
+    function onWindowResize() {
+      if (camera && renderer) {
+        camera.aspect = viewerContainer.clientWidth / viewerContainer.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(viewerContainer.clientWidth, viewerContainer.clientHeight);
+      }
+    }
+
+    openButtons.forEach(btn => {
+      btn.addEventListener('click', function () {
+        const glbUrl = this.getAttribute('data-model');
+        modal.style.display = 'flex';
+        init3DViewer(glbUrl);
+      });
+    });
+
+    closeButton.addEventListener('click', function () {
+      modal.style.display = 'none';
+      cancelAnimationFrame(animationId);
+      if (renderer) {
+        renderer.dispose();
+      }
+      window.removeEventListener('resize', onWindowResize);
+      viewerContainer.innerHTML = '';
+    });
+
+    // --- Funcionalidad del carrusel ---
+    const nextButtons = document.querySelectorAll('.carousel-btn.next');
+    const prevButtons = document.querySelectorAll('.carousel-btn.prev');
+
+    nextButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const carousel = btn.parentElement.querySelector('.carousel');
+        carousel.scrollBy({ left: 320, behavior: 'smooth' });
+      });
+    });
+
+    prevButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const carousel = btn.parentElement.querySelector('.carousel');
+        carousel.scrollBy({ left: -320, behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>

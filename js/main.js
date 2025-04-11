@@ -173,3 +173,119 @@ const canvas = document.getElementById('mainCanvas');
             createColorPalette();
         });
         window.addEventListener('resize', initCanvas);
+
+
+// funcion de las cosas 3d
+
+const modal = document.getElementById('modal');
+    const viewerContainer = document.getElementById('viewer');
+    const closeButton = document.querySelector('.close-button');
+    const openButtons = document.querySelectorAll('.btn-3d');
+
+    // Variables de Three.js
+    let renderer, scene, camera, controls, animationId;
+
+    function init3DViewer(glbUrl) {
+      if (renderer) {
+        renderer.dispose();
+        viewerContainer.innerHTML = '';
+      }
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(viewerContainer.clientWidth, viewerContainer.clientHeight);
+      viewerContainer.appendChild(renderer.domElement);
+
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(
+        45,
+        viewerContainer.clientWidth / viewerContainer.clientHeight,
+        0.1,
+        1000
+      );
+      camera.position.set(3, 1, 7);
+
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+      scene.add(ambientLight);
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+      directionalLight.position.set(0, 1, 1);
+      scene.add(directionalLight);
+
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      
+      const loader = new THREE.GLTFLoader();
+      loader.load(
+        glbUrl,
+        function (gltf) {
+          scene.add(gltf.scene);
+          // Ajuste de cámara según el tamaño del modelo.
+          const box = new THREE.Box3().setFromObject(gltf.scene);
+          const center = new THREE.Vector3();
+          box.getCenter(center);
+          const size = new THREE.Vector3();
+          box.getSize(size);
+          const maxDim = Math.max(size.x, size.y, size.z);
+          const fov = camera.fov * (Math.PI / 180);
+          const cameraDistance = (maxDim / (2 * Math.tan(fov / 2))) * 1.5;
+          camera.position.copy(center);
+          camera.position.z += cameraDistance;
+          camera.lookAt(center);
+          controls.target.copy(center);
+        },
+        undefined,
+        function (error) {
+          console.error('Error al cargar el modelo:', error);
+        }
+      );
+
+      function animate() {
+        animationId = requestAnimationFrame(animate);
+        controls.update();
+        renderer.render(scene, camera);
+      }
+      animate();
+      window.addEventListener('resize', onWindowResize, false);
+    }
+
+    function onWindowResize() {
+      if (camera && renderer) {
+        camera.aspect = viewerContainer.clientWidth / viewerContainer.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(viewerContainer.clientWidth, viewerContainer.clientHeight);
+      }
+    }
+
+    openButtons.forEach(btn => {
+      btn.addEventListener('click', function () {
+        const glbUrl = this.getAttribute('data-model');
+        modal.style.display = 'flex';
+        init3DViewer(glbUrl);
+      });
+    });
+
+    closeButton.addEventListener('click', function () {
+      modal.style.display = 'none';
+      cancelAnimationFrame(animationId);
+      if (renderer) {
+        renderer.dispose();
+      }
+      window.removeEventListener('resize', onWindowResize);
+      viewerContainer.innerHTML = '';
+    });
+
+    // --- Funcionalidad del carrusel ---
+    const nextButtons = document.querySelectorAll('.carousel-btn.next');
+    const prevButtons = document.querySelectorAll('.carousel-btn.prev');
+
+    nextButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const carousel = btn.parentElement.querySelector('.carousel');
+        carousel.scrollBy({ left: 320, behavior: 'smooth' });
+      });
+    });
+
+    prevButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const carousel = btn.parentElement.querySelector('.carousel');
+        carousel.scrollBy({ left: -320, behavior: 'smooth' });
+      });
+    });

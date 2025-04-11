@@ -26,7 +26,7 @@
             </div>
         </header>
 
-        <div class="container">
+        <div class="containerVideo">
             <div class="fondo">
                 <video class="video" autoplay loop muted src="video/9XcG5yzwHJUA9vJJCjBj.mp4" type="video/mp4" ></video>
             </div>
@@ -35,6 +35,92 @@
                 <h1>Mysterium<br> Artis</h1>
             </div>
         </div>
+    </section>
+
+    <section id="Obras">
+        <div class="container">
+            <!-- Sección de Pinturas con carrusel -->
+            <section>
+              <h2 class="section-title">Pinturas</h2>
+              <div class="carousel-container">
+                <button class="carousel-btn prev">&#10094;</button>
+                <div class="carousel">
+                  <!-- Card 1: -->
+                  <div class="artwork">
+                    <img src="img/noche-estrellada.jpg" alt="La noche estrellada">
+                    <div class="art-info">
+                      <h3>La noche estrellada</h3>
+                      <p class="artist">Vincent van Gogh</p>
+                      <p class="description">
+                        Obra icónica del postimpresionismo donde se plasma un cielo lleno de movimiento y emoción. El efecto del pincel, la cantidad de detalles y el juego de luces hacen que el observador se sienta inmerso en la escena.
+                      </p>
+                      <button class="btn-3d" data-model="3d-glb/noche-estrellada.glb">Ver en 3D</button>
+                    </div>
+                  </div>
+                  <!-- Card 2: -->
+                  <div class="artwork">
+                    <img src="img/noche-estrellada.jpg" alt="La noche estrellada">
+                    <div class="art-info">
+                      <h3>La noche estrellada</h3>
+                      <p class="artist">Vincent van Gogh</p>
+                      <p class="description">
+                        Obra icónica del postimpresionismo donde se plasma un cielo lleno de movimiento y emoción. El efecto del pincel, la cantidad de detalles y el juego de luces hacen que el observador se sienta inmerso en la escena.
+                      </p>
+                      <button class="btn-3d" data-model="3d-glb/noche-estrellada.glb">Ver en 3D</button>
+                    </div>
+                  </div>
+                  <!-- Puedes agregar más cards de pinturas aquí -->
+
+                  
+                </div>
+                <button class="carousel-btn next">&#10095;</button>
+              </div>
+            </section>
+            
+            <!-- Sección de Esculturas con carrusel -->
+            <section>
+              <h2 class="section-title">Esculturas</h2>
+              <div class="carousel-container">
+                <button class="carousel-btn prev">&#10094;</button>
+                <div class="carousel">
+                  <!-- Card 1: Ejemplo "Escultura abstracta" -->
+                  <div class="artwork">
+                    <img src="img/escultura-abstracta.jpg" alt="Escultura abstracta">
+                    <div class="art-info">
+                      <h3>Escultura abstracta</h3>
+                      <p class="artist">Autor: [Nombre del autor]</p>
+                      <p class="description">
+                        Una pieza moderna que combina formas y volúmenes de manera única. Su acabado y composición invitan a la reflexión sobre la geometría en el arte.
+                      </p>
+                      <button class="btn-3d" data-model="3d-glb/escultura-abstracta.glb">Ver en 3D</button>
+                    </div>
+                  </div>
+                  <!-- Card 2: Ejemplo "Escultura clásica" -->
+                  <div class="artwork">
+                    <img src="img/escultura-clasica.jpg" alt="Escultura clásica">
+                    <div class="art-info">
+                      <h3>Escultura clásica</h3>
+                      <p class="artist">Autor: [Nombre del autor]</p>
+                      <p class="description">
+                        Representación de la tradición en escultura clásica, en la que se destacan los detalles y líneas heredadas de la estética antigua.
+                      </p>
+                      <button class="btn-3d" data-model="3d-glb/escultura-clasica.glb">Ver en 3D</button>
+                    </div>
+                  </div>
+                  <!-- Agrega más cards de esculturas aquí -->
+                </div>
+                <button class="carousel-btn next">&#10095;</button>
+              </div>
+            </section>
+          </div>
+          
+          <!-- Modal para el visor 3D -->
+          <div id="modal" class="modal">
+            <div class="modal-content">
+              <span class="close-button">&times;</span>
+              <div id="viewer"></div>
+            </div>
+          </div>
     </section>
     <section class="draw-section">
             <div class="canvas-container">
@@ -61,6 +147,9 @@
                 <button class="clear-btn" onclick="clearCanvas()">Limpiar</button>
             </div>
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.138/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.138/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.138/examples/js/controls/OrbitControls.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

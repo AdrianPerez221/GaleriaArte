@@ -298,18 +298,16 @@ nav a:hover {
   .art-info p.artist {
     font-style: italic;
     color: #555;
-    margin-bottom: 0.25rem; /* Reducir espacio después del artista */
+    margin-bottom: -0.25rem; /* Reducir espacio después del artista */
     font-size: 0.85rem; /* Tamaño más compacto */
   }
   /* La descripción tiene un alto máximo y scroll vertical si excede ese espacio */
   .art-info p.description {
     font-size: 0.9rem;
     color: #666;
-    margin-bottom: 1rem;
     overflow-y: auto;
     flex-grow: 1;    /* Ocupa el espacio disponible */
-    min-height: 55px;   /* Permite que se reduzca según necesidad */
-    max-height: none; /* Eliminamos límite máximo */
+    height: 60px;   /* Permite que se reduzca según necesidad */
     line-height: 1.5; /* Mejor legibilidad */
     padding-right: 0.5rem;
     line-clamp: unset; /* Eliminar límite de líneas */
@@ -324,11 +322,9 @@ nav a:hover {
     border-radius: 4px;
     text-transform: uppercase;
     font-weight: bold;
-    cursor: pointer;
     position: relative;
     transition: background 0.3s ease;
     overflow: hidden;
-    margin-top: 0.5em;  /* Se posiciona al final para ocupar el espacio disponible */
     font-size: 0.85rem;
   }
   .btn-3d:hover {

@@ -118,8 +118,8 @@ const canvas = document.getElementById('mainCanvas');
             });
 
             // Color inicial
-            const initialColor = colors[10];
-            palette.children[10].classList.add('active');
+            const initialColor = colors[72];
+            palette.children[72].classList.add('active');
             document.getElementById('selectedColor').style.backgroundColor = initialColor;
             ctx.strokeStyle = initialColor;
             ctx.fillStyle = initialColor;

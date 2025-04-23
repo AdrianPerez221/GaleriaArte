@@ -219,6 +219,8 @@ nav a:hover {
     font-size: 1.8rem;
     color: #222;
   }
+
+  /* inicio tarjetas */
   /* Estilos para el carrusel */
   .carousel-container {
     position: relative;
@@ -264,7 +266,7 @@ nav a:hover {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     min-width: 280px;  /* Valor mínimo para el carrusel */
     max-width: 320px;  /* Puedes ajustar el ancho deseado */
-    height: 450px;     /* Altura fija para toda la tarjeta */
+    height: 500px;     /* Altura fija para toda la tarjeta */
     display: flex;
     flex-direction: column;
   }
@@ -273,43 +275,52 @@ nav a:hover {
     box-shadow: 0 6px 10px rgba(0,0,0,0.15);
   }
   .artwork img {
-    width: 100%;
-    height: 250px;
+    height: 55%; /* Reducimos porcentaje para la imagen */
     object-fit: cover;
-    display: block;
-  }
+    object-position: top center; /* Enfoca la parte superior */
+    flex-shrink: 0;
+}
   .art-info {
     padding: 1rem;
     flex: 1;
+    min-height: 0;
     display: flex;
     flex-direction: column;
-  }
+    padding: 0.75rem; /* Reducir padding interno */
+    gap: 0.25rem; /* Espacio más ajustado entre elementos */
+}
   .art-info h3 {
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
     color: #222;
+    line-clamp: 1;
+    margin-bottom: 0.25rem;
+    font-size: 1.1rem;
   }
   .art-info p.artist {
     font-style: italic;
     color: #555;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem; /* Reducir espacio después del artista */
+    font-size: 0.85rem; /* Tamaño más compacto */
   }
   /* La descripción tiene un alto máximo y scroll vertical si excede ese espacio */
   .art-info p.description {
     font-size: 0.9rem;
     color: #666;
     margin-bottom: 1rem;
-    max-height: 80px;      /* Altura máxima para el texto */
-    overflow-y: auto;      /* Se activa el scroll vertical si excede */
-    padding-right: 5px;    /* Para evitar que el scrollbar tape el texto */
-  }
+    overflow-y: auto;
+    flex-grow: 1;    /* Ocupa el espacio disponible */
+    min-height: 55px;   /* Permite que se reduzca según necesidad */
+    max-height: none; /* Eliminamos límite máximo */
+    line-height: 1.5; /* Mejor legibilidad */
+    padding-right: 0.5rem;
+    line-clamp: unset; /* Eliminar límite de líneas */
+}
   /* Botón 3D con decoración */
   .btn-3d {
     display: inline-block;
     background: #2c3e50;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 6px 12px;
     border-radius: 4px;
     text-transform: uppercase;
     font-weight: bold;
@@ -317,7 +328,8 @@ nav a:hover {
     position: relative;
     transition: background 0.3s ease;
     overflow: hidden;
-    margin-top: auto;  /* Se posiciona al final para ocupar el espacio disponible */
+    margin-top: 0.5em;  /* Se posiciona al final para ocupar el espacio disponible */
+    font-size: 0.85rem;
   }
   .btn-3d:hover {
     background: #34495e;
@@ -371,3 +383,49 @@ nav a:hover {
       gap: 1rem;
     }
   }
+
+/* final tarjetas */
+
+/* inicio loader */
+/* Loader styles */
+.loader-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1005;
+  flex-direction: column;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 5px solid #3498db;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+.loader-text {
+  color: white;
+  font-size: 1.2rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error message */
+.error-message {
+  color: #ff4444;
+  display: none;
+  text-align: center;
+  padding: 1rem;
+}

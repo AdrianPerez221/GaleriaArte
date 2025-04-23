@@ -117,10 +117,15 @@
           <!-- Modal para el visor 3D -->
           <div id="modal" class="modal">
             <div class="modal-content">
-              <span class="close-button">&times;</span>
-              <div id="viewer"></div>
+                <span class="close-button">&times;</span>
+                <div class="loader-container">
+                    <div class="loader"></div>
+                    <div class="loader-text">Cargando modelo 3D...</div>
+                </div>
+                <div class="error-message"></div>
+                <div id="viewer"></div>
             </div>
-          </div>
+        </div>
     </section>
     <section class="draw-section">
             <div class="canvas-container">

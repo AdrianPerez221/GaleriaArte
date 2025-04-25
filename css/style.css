@@ -1,25 +1,30 @@
-/* Estilos generales */
 body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
     font-family: sans-serif;
+    background-color: #ffffff;
+    color: rgb(8, 8, 8);
 }
 
-/* Header y navegación */
+/* Header */
 header {
     background: #855951;
     padding: 5px 0;
 }
 
+.petter{
+    margin-top: 300px;
+}
 .logo-img {
     height: 60px;
     width: auto;
     transition: height 0.3s ease;
 }
+
 .nav-link {
     color: #F0E4CC !important;
-    font-family:"Marcellus SC", serif;
+    font-family: "Marcellus SC", serif;
     font-size: 1.2rem;
     font-weight: bold;
     margin-left: 10px;
@@ -32,23 +37,17 @@ header {
     border-radius: 50px;
 }
 
-/* Hero section */
+/* Hero Section */
 .hero-container {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
 }
 
-.video-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
 .video-background video {
     object-fit: cover;
+    width: 100%;
+    height: 100%;
 }
 
 .overlay {
@@ -67,15 +66,115 @@ header {
 }
 
 .main-title {
-    font-size: clamp(10.5rem, 10vw, 6rem); /* Tamaño responsive mejorado */
+    font-size: clamp(10.5rem, 10vw, 6rem);
     margin: 0;
     font-family: "Inspiration", cursive;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     line-height: 100%;
-    text-align: left; /* Asegura alineación izquierda */
 }
 
+/* Slider */
+.carousel-custom {
+    height: 100vh;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    will-change: transform;
+    scroll-behavior: unset;
+    overflow-x: hidden;
+}
 
+.slide {
+    min-width: 51vw;
+    height: 70vh;
+    flex-shrink: 0;
+    margin-right: 20px;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    pointer-events: none;
+}
+
+.slide.active {
+    pointer-events: all;
+}
+
+#slider-section {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#slider-section.visible {
+    opacity: 1;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.marco-foto {
+    width: 420px;
+    height: 290px;
+    background-color: #855951;
+    padding: 20px;
+    border-radius: 10px;
+    margin-right: 30px;
+}
+
+.foto-artista {
+    width: 380px;
+    height: 250px;
+    border: 10px solid #2d2d2d29;
+}
+
+.foto-artista img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.foto-artista img.mostrando {
+    display: block;
+    opacity: 1;
+}
+
+.info-artista {
+    width: 35vw;
+    height: 290px;
+    background-color: #F0E4CC;
+    padding: 20px;
+    border-left: 5px solid #855951;
+}
+
+.nombre-artista {
+    color: #855951;
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.fechas-artista {
+    color: #888;
+    font-size: 18px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.texto-info {
+    line-height: 1.6;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.resaltado {
+    color: #855951;
+    font-weight: bold;
+}
+
+/* Media Queries */
 @media (max-width: 992px) {
     .main-title {
         font-size: 8rem;

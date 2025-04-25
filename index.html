@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galeria de Arte</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inspiration&display=swap" rel="stylesheet">
-    <!-- Custom CSS -->
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
@@ -48,9 +45,64 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
+    <section>
+        <div class="petter"></div>
+    </section>
+
+    <div class="container-fluid vh-100 p-0" id="slider-section">
+        <div class="d-flex overflow-x-hidden h-100 align-items-center carousel-custom">
+            <!-- Slide 1 - Van Gogh -->
+            <div class="slide">
+                <div class="container">
+                    <div class="marco-foto">
+                        <div class="foto-artista">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeptKfhp3Y0g7i9fQnMhf-ouixMJqpAqea-g&s" 
+                                 alt="Van Gogh" 
+                                 class="mostrando" 
+                                 id="foto0">
+                        </div>
+                    </div>
+                    <div class="info-artista" id="info-0"></div>
+                </div>
+            </div>
+            
+            <!-- Slide 2 - Frida Kahlo -->
+            <div class="slide">
+                <div class="container">
+                    <div class="marco-foto">
+                        <div class="foto-artista">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlBdIVnKn1uxv7769ttmM4UY9zhKkNM4drPA&s" 
+                                 alt="Frida Kahlo" 
+                                 class="mostrando"
+                                 id="foto1">
+                        </div>
+                    </div>
+                    <div class="info-artista" id="info-1"></div>
+                </div>
+            </div>
+            
+            <!-- Slide 3 - Picasso -->
+            <div class="slide">
+                <div class="container">
+                    <div class="marco-foto">
+                        <div class="foto-artista">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4Jde-7j60vX0igbWqYTF-_Yb1UnJrs9Q1yg&s" 
+                                 alt="Pablo Picasso" 
+                                 class="mostrando"
+                                 id="foto2">
+                        </div>
+                    </div>
+                    <div class="info-artista" id="info-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+
+

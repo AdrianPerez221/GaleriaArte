@@ -14,7 +14,7 @@ header {
 }
 
 .petter{
-    margin-top: 300px;
+    margin-top: 500px;
 }
 .logo-img {
     height: 60px;
@@ -75,14 +75,26 @@ header {
 
 /* Slider */
 .carousel-custom {
-    height: 100vh;
+    height: 100%;
+    overscroll-behavior-x: contain;
     overflow-x: auto;
     scroll-behavior: smooth;
     will-change: transform;
     scroll-behavior: unset;
     overflow-x: hidden;
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+    cursor: grab;
 }
 
+
+.carousel-custom::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari y Opera */
+}
+
+.carousel-custom:active {
+    cursor: grabbing;
+}
 .slide {
     min-width: 51vw;
     height: 70vh;
@@ -90,7 +102,7 @@ header {
     margin-right: 20px;
     backface-visibility: hidden;
     transform: translateZ(0);
-    pointer-events: none;
+    pointer-events: auto;
 }
 
 .slide.active {
@@ -98,6 +110,8 @@ header {
 }
 
 #slider-section {
+    width: 100vw;
+    height: 100vh;
     opacity: 0;
     transition: opacity 0.5s ease;
 }

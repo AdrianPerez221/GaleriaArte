@@ -370,6 +370,11 @@ nav a:hover {
     cursor: pointer;
     z-index: 1010;
   }
+
+  .close-button:hover  {
+    color: red;
+  }
+  
   #viewer {
     width: 100%;
     height: 100%;
